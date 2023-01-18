@@ -1,5 +1,6 @@
 
 const { setTimeout } = require("timers/promises");
+const config = require('./config')
 
 async function sentry_member(email, team_name) {
     /* Ajout d un membre dans une team sur sentry: [email] [team]*/
