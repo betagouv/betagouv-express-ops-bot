@@ -15,6 +15,7 @@ const ENDPOINTS = [
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
 
 app.post( "/", async ( req, res ) => {
+    console.log('Received post on main endpoint')
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
@@ -36,6 +37,7 @@ app.post( "/", async ( req, res ) => {
 });
 
 app.post("/check-result", async ( req, res ) => {
+    console.log('Received post on check result endpoint')
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
