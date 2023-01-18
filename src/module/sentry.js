@@ -58,6 +58,7 @@ async function response_sentry_member(ctx, email, team_name) {
     await setTimeout(10000);
     if (IN_MEMORY_DB[ctx.post_id]) {
         const job = await helper.getJobInfo(IN_MEMORY_DB[ctx.post_id])
+        console.log('LCS JOB RESPONSE', job)
         let text
         if (job.status === 'finished') {
             text = `Sentry: ajout de l utilisateur ${email} à la team ${team_name} :white_check_mark: ${IN_MEMORY_DB[ctx.post_id]}`

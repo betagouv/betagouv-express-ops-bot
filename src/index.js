@@ -71,7 +71,7 @@ app.post("/feedback-function-call", async(req, res) => {
         text = "Je traite ta demande: `" + req.body.text + "`..."
     }
     return text
-})
+});
 
 // start the Express server
 app.listen(port, () => {
