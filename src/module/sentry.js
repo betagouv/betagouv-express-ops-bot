@@ -30,7 +30,9 @@ async function sentry_member(ctx, email, team_name) {
             team_name,
         }
         console.log(params)
-        const r = await axios.post(api_endpoint, params,  config.headers)
+        const r = await axios
+            .post(api_endpoint, params,  config.headers)
+            .catch(e => e.response )
 
         resp = "\n``` json\n"
         resp += JSON.stringify(r.data)
