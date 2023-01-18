@@ -19,21 +19,19 @@ app.post("/check-question", async ( req, res ) => {
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
-    const cmd = `${req.body.text.trim()}`.split(' ').join(' ')
+    const cmd = `${req.body.text.trim()}`.split(' ').map(c => c.trim()).join(' ')
     console.log("Endpoint quest :", cmd)
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
-    if (!endpointNames.length) {
-        return res.status(404).json({
-            'error': 'Aucun fonction ne correspond a cette appel'
+    if (!endpointNames.length === 1) {
+        const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
+        const endpointName = endpoint.split('_').join(' ')
+        const params = cmd.replace(endpointName, '').trim().split(' ')
+        const resp = await endpoint(...params)
+        return res.json({
+            text: resp,
+            response_type: 'comment',
         })
     }
-    if (endpointNames.length > 2) {
-        return res.status(404).json({
-            'error': 'Plusieurs fonctions correspondent à la commande'
-        })
-    }
-    const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
-    await endpoint(req, res)
 });
 
 app.post("/check-result", async ( req, res ) => {
@@ -44,18 +42,35 @@ app.post("/check-result", async ( req, res ) => {
     const cmd = `response ${req.body.text.trim()}`.split(' ').join(' ')
     console.log("Endpoint resp :", cmd)
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    if (endpointNames.length === 1) {
+        const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
+        const endpointName = endpoint.split('_').join(' ')
+        const params = cmd.replace(endpointName, '').trim().split(' ')
+        const resp = await endpoint(...params)
+        return res.json({
+            text: resp,
+            response_type: 'comment',
+        })
+    }
+})
+
+app.post("/feedback-function-call", async(res, res) => {
+    console.log('Received post on check result endpoint')
+    if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
+        return
+    }
+    const cmd = `response ${req.body.text.trim()}`.split(' ').join(' ')
+    console.log("Endpoint resp :", cmd)
+    const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    let text
     if (!endpointNames.length) {
-        return res.status(404).json({
-            'error': 'Aucun fonction ne correspond a cette appel'
-        })
+        text = 'Aucune fonction ne correspond a cette appel'
+    } else if (endpointNames.length > 2) {
+        text = 'Plusieurs fonctions correspondent à la commande'
+    } else {
+        text = "Je traite ta demande: `" + req.body.text + "`..."
     }
-    if (endpointNames.length > 2) {
-        return res.status(404).json({
-            'error': 'Plusieurs fonctions correspondent à la commande'
-        })
-    }
-    const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
-    await endpoint(req, res)
+    return text
 })
 
 // start the Express server
