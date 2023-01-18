@@ -8,7 +8,7 @@ module.exports = {
         }
 
         try {
-            const r = await axios.post(api_endpoint, {},  config.headers)
+            const r = await axios.post(api_endpoint, {},  { headers: config.headers})
             return r.data   
         } catch(e) {
             throw new Error(e)
