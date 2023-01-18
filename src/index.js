@@ -80,6 +80,7 @@ app.post( "/", async ( req, res ) => {
     }
     let type
     const cmd = req.body.text.trim()
+    console.log("RESP :", cmd)
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
     if (!endpointNames.length) {
         return res.status(404).json({
