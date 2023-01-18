@@ -95,7 +95,7 @@ app.post( "/", async ( req, res ) => {
             'error': 'Plusieurs fonctions correspondent à la commande'
         })
     }
-    const endpoint = ENDPOINTS.find(endpoint => endpoint.name === endpointNames[0])
+    const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
     await endpoint(req, res)
 });
 
