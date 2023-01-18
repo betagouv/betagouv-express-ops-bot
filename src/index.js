@@ -14,7 +14,7 @@ const ENDPOINTS = [
 ]
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
 
-app.post( "/", async ( req, res ) => {
+app.post("/check-question", async ( req, res ) => {
     console.log('Received post on main endpoint')
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
@@ -59,7 +59,7 @@ app.post("/check-result", async ( req, res ) => {
 })
 
 // start the Express server
-app.listen( port, () => {
+app.listen(port, () => {
     console.log( `server started at http://localhost:${ port }` );
 } );
 
