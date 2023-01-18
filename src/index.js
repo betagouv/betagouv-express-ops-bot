@@ -26,7 +26,7 @@ app.post("/check-question", async ( req, res ) => {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
         const endpointName = endpoint.name.split('_').join(' ')
         const params = cmd.replace(endpointName, '').trim().split(' ')
-        const resp = await endpoint(...params)
+        const resp = await endpoint(req.body,...params)
         return res.json({
             text: resp,
             response_type: 'comment',
@@ -46,7 +46,7 @@ app.post("/check-result", async ( req, res ) => {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
         const endpointName = endpoint.name.split('_').join(' ')
         const params = cmd.replace(endpointName, '').trim().split(' ')
-        const resp = await endpoint(...params)
+        const resp = await endpoint(req.body, ...params)
         return res.json({
             text: resp,
             response_type: 'comment',
