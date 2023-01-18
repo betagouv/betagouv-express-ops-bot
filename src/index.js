@@ -99,6 +99,28 @@ app.post( "/", async ( req, res ) => {
     await endpoint(req, res)
 });
 
+app.post("/check-result", async ( req, res ) => {
+    if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
+        return
+    }
+    let type
+    const cmd = `response ${req.body.text.trim()}`
+    console.log("RESP :", cmd)
+    const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    if (!endpointNames.length) {
+        return res.status(404).json({
+            'error': 'Aucun fonction ne correspond a cette appel'
+        })
+    }
+    if (endpointNames.length > 2) {
+        return res.status(404).json({
+            'error': 'Plusieurs fonctions correspondent à la commande'
+        })
+    }
+    const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
+    await endpoint(req, res)
+})
+
 // start the Express server
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );
