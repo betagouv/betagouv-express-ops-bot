@@ -1,5 +1,5 @@
 const express = require( "express" );
-const sentry = require('./module/sentry');
+const sentry = require('./module/sentry')
 const app = express();
 const port = process.env.PORT; // default port to listen
 app.use(express.json())  
