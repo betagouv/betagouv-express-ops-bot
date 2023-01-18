@@ -29,7 +29,6 @@ async function sentry_member(ctx, email, team_name) {
             email,
             team_name,
         }
-        console.log(params)
         const r = await axios
             .post(api_endpoint, params, {
                 headers:config.headers
@@ -45,8 +44,8 @@ async function sentry_member(ctx, email, team_name) {
                 "`betaservices sentry member` reponse incorrecte: {}")
             return `:confused: Oups, réponse incorrecte: json request [${r.status}] ${resp}`
         } else {
-            IN_MEMORY_DB[ctx.post_id] = r.request
-            return "Ta demande est en cours de réalisation: `{ask}` : [{r.status_code}] {resp}"
+            IN_MEMORY_DB[ctx.post_id] = r.data.request
+            return `Ta demande est en cours de réalisation: ${resp}`
         }
     } catch(e) {
         console.log("`betaservices sentry member` connectionerror: " + e)
