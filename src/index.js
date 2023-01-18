@@ -36,6 +36,7 @@ app.post("/check-question", async ( req, res ) => {
 
 app.post("/check-result", async ( req, res ) => {
     console.log('Received post on check result endpoint')
+    console.log(req.body)
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
@@ -52,10 +53,10 @@ app.post("/check-result", async ( req, res ) => {
             response_type: 'comment',
         })
     }
-})
+});
 
-app.post("/feedback-function-call", async(res, res) => {
-    console.log('Received post on check result endpoint')
+app.post("/feedback-function-call", async(req, res) => {
+    console.log('Received feedback function call')
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
