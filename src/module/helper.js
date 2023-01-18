@@ -3,7 +3,7 @@ const config = require('../config')
 
 module.exports = {
     getJobInfo: async function(job_id) {
-        let api_endpoint = `${config.endpoint}/api/queue/jobs`
+        let api_endpoint = `${config.endpoint}/queue/jobs`
         if (job_id) {
             api_endpoint += `/${job_id}`
         }
