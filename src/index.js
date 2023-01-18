@@ -22,7 +22,7 @@ app.post("/check-question", async ( req, res ) => {
     const cmd = `${req.body.text.trim()}`.split(' ').map(c => c.trim()).join(' ')
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
     console.log("Endpoint quest :", endpointNames)
-    if (!endpointNames.length === 1) {
+    if (endpointNames.length === 1) {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
         const endpointName = endpoint.name.split('_').join(' ')
         const params = cmd.replace(endpointName, '').trim().split(' ')
