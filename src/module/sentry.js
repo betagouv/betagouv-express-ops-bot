@@ -38,13 +38,14 @@ async function sentry_member(ctx, email, team_name) {
         resp = "\n``` json\n"
         resp += JSON.stringify(r.data)
         resp += "\n```\n"
+        
+        IN_MEMORY_DB[ctx.post_id] = r.data.request
 
-        if ([200, 201].includes(r.status)) {
+        if (![200, 201].includes(r.status)) {
             console.log(
                 "`betaservices sentry member` reponse incorrecte: {}")
             return `:confused: Oups, réponse incorrecte: json request [${r.status}] ${resp}`
         } else {
-            IN_MEMORY_DB[ctx.post_id] = r.data.request
             return `Ta demande est en cours de réalisation: ${resp}`
         }
     } catch(e) {
