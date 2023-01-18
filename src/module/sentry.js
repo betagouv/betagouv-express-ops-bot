@@ -34,13 +34,12 @@ async function sentry_member(email, team_name) {
     }
 }
 
-async function response_sentry_member() {
+async function response_sentry_member(email, team_name) {
     console.log('Response sentry member')
-    const cmdParams = req.body.text.split(' ').map(param => param.trim())
     await setTimeout(10000);
     const job_info = "finished"
     if (job_info == "finished") {
-        const text = `Sentry: ajout de l utilisateur ${email} à la team ${team} :white_check_mark:`
+        const text = `Sentry: ajout de l utilisateur ${email} à la team ${team_name} :white_check_mark:`
         return text
     }
 }
