@@ -1,6 +1,5 @@
 const axios = require('axios')
 const { setTimeout } = require("timers/promises");
-const axios = require('axios')
 const config = require('../config')
 const helper = require('./helper')
 const IN_MEMORY_DB = require('./inmemory').IN_MEMORY_DB
