@@ -62,7 +62,7 @@ async function response_sentry_member(ctx, email, team_name) {
         if (job.status === 'finished') {
             text = `Sentry: ajout de l utilisateur ${email} à la team ${team_name} :white_check_mark: ${IN_MEMORY_DB[ctx.post_id]}`
         } else {
-            text = `Sentry : la tâche n'est pas fini après 10s il doit y avoir une erreur`
+            text = `Sentry : la tâche ${IN_MEMORY_DB[ctx.post_id]} n'est pas fini après 10s il doit y avoir une erreur`
         }
         return text
     }
