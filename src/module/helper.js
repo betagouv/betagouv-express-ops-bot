@@ -9,7 +9,7 @@ module.exports = {
         }
 
         try {
-            const r = await axios.post(api_endpoint, {},  { headers: config.headers }).catch(e => e.response)
+            const r = await axios.get(api_endpoint, { headers: config.headers }).catch(e => e.response)
             return r.data   
         } catch(e) {
             throw new Error(e)
