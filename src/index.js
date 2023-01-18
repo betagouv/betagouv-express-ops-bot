@@ -20,7 +20,7 @@ app.post("/check-question", async ( req, res ) => {
         return
     }
     const cmd = `${req.body.text.trim()}`.split(' ').map(c => c.trim()).join(' ')
-    const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    const endpointNames = ENDPOINTS_NAME.filter(endpointName => cmd.startsWith(endpointName))
     console.log("Endpoint quest :", endpointNames)
     if (endpointNames.length === 1) {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
@@ -40,7 +40,7 @@ app.post("/check-result", async ( req, res ) => {
         return
     }
     const cmd = `response ${req.body.text.trim()}`.split(' ').join(' ')
-    const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    const endpointNames = ENDPOINTS_NAME.filter(endpointName => cmd.startsWith(endpointName))
     console.log("Endpoint response :", endpointNames)
     if (endpointNames.length === 1) {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
@@ -60,7 +60,7 @@ app.post("/feedback-function-call", async(req, res) => {
         return
     }
     const cmd = `response ${req.body.text.trim()}`.split(' ').join(' ')
-    const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    const endpointNames = ENDPOINTS_NAME.filter(endpointName => cmd.startsWith(endpointName))
     console.log("Endpoint feedback :", endpointNames)
     let text
     if (!endpointNames.length) {
