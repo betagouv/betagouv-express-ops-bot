@@ -74,6 +74,7 @@ ${process.env.OPS_FORM_TEXT}`
 
 const ENDPOINTS = [
     sentry.sentry_member,
+    sentry.response_sentry_member
 ]
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
 

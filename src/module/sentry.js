@@ -12,7 +12,7 @@ async function sentry_member(req, res) {
 
 async function response_sentry_member(req, res) {
     const cmdParams = req.body.text.split(' ').map(param => param.trim())
-    await setTimeout(5000);
+    await setTimeout(10000);
     res.json({
         text: 'sentry response',
         response_type: 'comment',
@@ -20,5 +20,6 @@ async function response_sentry_member(req, res) {
 }
 
 module.exports = {
-    sentry_member
+    sentry_member,
+    response_sentry_member
 }
