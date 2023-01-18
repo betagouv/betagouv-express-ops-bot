@@ -1,4 +1,5 @@
 const express = require( "express" );
+const sentry = require('./module/sentry');
 const app = express();
 const port = process.env.PORT; // default port to listen
 app.use(express.json())  
@@ -71,7 +72,9 @@ ${process.env.OPS_FORM_TEXT}`
     }
 }
 
-const ENDPOINTS = []
+const ENDPOINTS = [
+    ...sentry,
+]
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
 
 app.post( "/", async ( req, res ) => {
