@@ -25,10 +25,12 @@ async function sentry_member(ctx, email, team_name) {
     const api_endpoint = `${config.endpoint}/api/sentry/member`
 
     try {
-        const r = await axios.post(api_endpoint, {
+        const params = {
             email,
             team_name,
-        },  config.headers)
+        }
+        console.log(params)
+        const r = await axios.post(api_endpoint, params,  config.headers)
 
         resp = "\n``` json\n"
         resp += JSON.stringify(r.data)
