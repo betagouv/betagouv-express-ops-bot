@@ -20,8 +20,8 @@ app.post("/check-question", async ( req, res ) => {
         return
     }
     const cmd = `${req.body.text.trim()}`.split(' ').map(c => c.trim()).join(' ')
-    console.log("Endpoint quest :", cmd)
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    console.log("Endpoint quest :", endpointNames)
     if (!endpointNames.length === 1) {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
         const endpointName = endpoint.name.split('_').join(' ')
@@ -36,13 +36,12 @@ app.post("/check-question", async ( req, res ) => {
 
 app.post("/check-result", async ( req, res ) => {
     console.log('Received post on check result endpoint')
-    console.log(req.body)
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
     const cmd = `response ${req.body.text.trim()}`.split(' ').join(' ')
-    console.log("Endpoint resp :", cmd)
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    console.log("Endpoint response :", endpointNames)
     if (endpointNames.length === 1) {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
         const endpointName = endpoint.name.split('_').join(' ')
@@ -61,8 +60,8 @@ app.post("/feedback-function-call", async(req, res) => {
         return
     }
     const cmd = `response ${req.body.text.trim()}`.split(' ').join(' ')
-    console.log("Endpoint resp :", cmd)
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    console.log("Endpoint feedback :", endpointNames)
     let text
     if (!endpointNames.length) {
         text = 'Aucune fonction ne correspond a cette appel'
