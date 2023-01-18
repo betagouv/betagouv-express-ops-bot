@@ -6,7 +6,6 @@ async function sentry_member(email, team_name) {
     /* Ajout d un membre dans une team sur sentry: [email] [team]*/
 
     console.log('Sentry member')
-    frm = mess.frm
 
     ask = "sentry member {email} {team}"
     api_endpoint = `${config.endpoint}/api/sentry/member`
