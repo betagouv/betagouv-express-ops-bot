@@ -71,25 +71,28 @@ ${process.env.OPS_FORM_TEXT}`
     }
 }
 
-app.post( "/", ( req, res ) => {
+const ENDPOINTS = []
+const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
+
+app.post( "/", async ( req, res ) => {
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
     let type
-    if (process.env.OPS_CHANNELS.split(',').includes(req.body.channel_name)) {
-        type = 'ops'
-    } else {
-        type = 'help'
-    }
-    let triggers = TRIGGERS[type].map(str => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(' ',''))
-    const text = req.body.text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(' ','')
-    if (triggers.some(trigger => text.includes(trigger))) {
-        const text = buildText[type](req.body)
-        res.json({
-            text,
-            response_type: 'comment',
+    const cmd = req.body.text.trim()
+    const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
+    if (!endpointNames.length) {
+        return res.status(404).json({
+            'error': 'Aucun fonction ne correspond a cette appel'
         })
     }
+    if (endpointNames.length > 2) {
+        return res.status(404).json({
+            'error': 'Plusieurs fonctions correspondent à la commande'
+        })
+    }
+    const endpoint = ENDPOINTS.find(endpoint => endpoint.name === endpointNames[0])
+    await endpoint(req, res)
 });
 
 // start the Express server
