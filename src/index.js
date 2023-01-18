@@ -24,7 +24,7 @@ app.post("/check-question", async ( req, res ) => {
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
     if (!endpointNames.length === 1) {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
-        const endpointName = endpoint.split('_').join(' ')
+        const endpointName = endpoint.name.split('_').join(' ')
         const params = cmd.replace(endpointName, '').trim().split(' ')
         const resp = await endpoint(...params)
         return res.json({
@@ -45,7 +45,7 @@ app.post("/check-result", async ( req, res ) => {
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => endpointName.startsWith(cmd))
     if (endpointNames.length === 1) {
         const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
-        const endpointName = endpoint.split('_').join(' ')
+        const endpointName = endpoint.name.split('_').join(' ')
         const params = cmd.replace(endpointName, '').trim().split(' ')
         const resp = await endpoint(...params)
         return res.json({
