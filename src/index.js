@@ -55,6 +55,11 @@ async function response(ctx) {
 
 app.post('/change-status-airtable', async(req, res) => {
     console.log(req.body)
+    if (req.body.callback_id === 'textId') {
+        await airtablelib.setStatus(req.body.submission.email, "Fini")
+        console.log(`Set record ${req.body.submission.email} to finish`)
+    }
+    res.status(200).json({})
 })
 
 app.post('/set-finished', async (req, res) => {
