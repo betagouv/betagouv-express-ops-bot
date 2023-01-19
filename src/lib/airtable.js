@@ -8,6 +8,7 @@ module.exports = {
             "recordId": recordId,
             "status": status
         }
+        console.log('CALL set status', recordId, status)
         return await axios
             .post(api_endpoint, params)
             .catch(e => e.response)
