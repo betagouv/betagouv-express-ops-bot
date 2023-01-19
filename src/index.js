@@ -53,7 +53,7 @@ app.post("/check-question", async ( req, res ) => {
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
-    const cmd = `${req.body.text.trim()}`.split(' ').map(c => c.trim()).join(' ')
+    const cmd = `${req.body.text.replace('!betaservices', '').trim()}`.split(' ').map(c => c.trim()).join(' ')
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => cmd.startsWith(endpointName))
     console.log("Endpoint quest :", endpointNames)
     if (endpointNames.length === 1) {
@@ -73,7 +73,7 @@ app.post("/check-result", async ( req, res ) => {
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
-    const cmd = `${req.body.text.trim()}`.split(' ').join(' ')
+    const cmd = `${req.body.text.replace('!betaservices', '').trim()}`.split(' ').map(c => c.trim()).join(' ')
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => cmd.startsWith(endpointName))
     console.log("Endpoint response :", endpointNames)
     if (endpointNames.length === 1) {
