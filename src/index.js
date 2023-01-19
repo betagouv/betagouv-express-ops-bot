@@ -71,6 +71,7 @@ app.post('/set-finished', async (req, res) => {
                     "display_name": "Quel est le record id airtable",
                     "name": "email",
                     "type": "text",
+                    "subtype:": "text",
                     "placeholder": "rec2319382131323"
                 }],
                 "submit_label": "Ok",
