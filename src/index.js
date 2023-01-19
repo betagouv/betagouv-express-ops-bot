@@ -1,4 +1,6 @@
 const express = require( "express" );
+const { setTimeout } = require("timers/promises");
+
 const sentry = require('./plugins/sentry')
 const airtable = require('./plugins/airtable')
 const matomo = require('./plugins/matomo')
