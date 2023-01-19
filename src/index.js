@@ -11,7 +11,7 @@ const updown = require('./plugins/updown')
 const help = require('./plugins/help')
 const job = require('./plugins/job')
 const config = require('./config')
-const airtablelib = require('../lib/airtable')
+const airtablelib = require('./lib/airtable')
 
 const app = express();
 const port = process.env.PORT; // default port to listen
