@@ -54,10 +54,19 @@ async function response(ctx) {
 app.post('/set-finished', async (req, res) => {
     console.log('SEt finished', req.body)
     if (req.body.context.token === config.AIRTABLE_INTERRACTIVE_TOKEN) {
+        if (req.body.context.recordId) {
+            await airtable.setStatus(req.body.context.recordId, 'Fini')
+            return res.json({
+                "update": {
+                  "message": "Updated!",
+                  props: {} // {} to removed attachement
+                }
+            })
+        }
         return res.json({
             "update": {
-              "message": "Updated!",
-              props: {}
+              "message": "Une erreur c'est produit",
+              props: {} // {} to removed attachement
             }
         })
     }
