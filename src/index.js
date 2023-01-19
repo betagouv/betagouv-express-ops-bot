@@ -55,6 +55,25 @@ async function response(ctx) {
 app.post('/set-finished', async (req, res) => {
     console.log('SEt finished', req.body)
     if (req.body.context.token === config.AIRTABLE_INTERRACTIVE_TOKEN) {
+        await axios.post(config.MATTERMOST_URL, {
+            "trigger_id": req.body.trigger_id,
+            "url": config.BOT_ENDPOINT,
+            "dialog": {
+                "callback_id": "testId",
+                "title": "Hello",
+                "introduction_text": "Hello",
+                "elements": [{
+                    "display_name": "Email",
+                    "name": "email",
+                    "type": "text",
+                    "subtype": "email",
+                    "placeholder": "placeholder@example.com"
+                }],
+                "submit_label": "Ok",
+                "notify_on_cancel": false,
+                "state": "<string provided by the integration that will be echoed back with dialog submission>"
+            }
+        })
         if (req.body.context.recordId) {
             await airtablelib.setStatus(req.body.context.recordId, 'Fini')
             return res.json({
