@@ -4,7 +4,7 @@ async function jobs(ctx, job_id) {
     try {
         const r = helper.getJobInfo(job_id)
         console.log('jobs', r)
-        const resp = "\n``` json\n"
+        let resp = "\n``` json\n"
         resp += JSON.stringify(r)
         resp += "\n```\n"
 

@@ -13,7 +13,7 @@ async function airtable(ctx, recordId, status) {
         .post(api_endpoint, params)
         .catch(e => e.response )
 
-        const resp = "\n``` json\n"
+        let resp = "\n``` json\n"
         resp += JSON.stringify(r.data)
         resp += "\n```\n"
         return resp
