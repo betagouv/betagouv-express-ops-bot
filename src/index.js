@@ -49,6 +49,29 @@ async function response(ctx) {
     }
 }
 
+app.post('/set-finished', async (req, res) => {
+    console.log('SEt finished', req.body)
+    return {
+        "update": {
+          "message": "Updated!",
+          "props": {}
+        },
+        "ephemeral_text": "You updated the post!"
+      }
+
+})
+
+app.post('/do-nothing', async (req, res) => {
+    console.log('Set do nothing', req.body)
+    return {
+        "update": {
+          "message": "Updated!",
+          "props": {}
+        },
+        "ephemeral_text": "You updated the post!"
+      }
+})
+
 app.post("/check-question", async ( req, res ) => {
     console.log('Received post on main endpoint')
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 

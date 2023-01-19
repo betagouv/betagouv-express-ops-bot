@@ -11,18 +11,18 @@ module.exports = {
                     "id": "message",
                     "name": "Ephemeral Message",
                     "integration": {
-                        "url": "http://127.0.0.1:7357",
+                        "url": config.BOT_ENDPOINT + '/set-finished',
                         "context": {
-                        "action": "do_something_ephemeral"
+                            "action": "do_something_ephemeral"
                         }
                     }
                     }, {
                     "id": "update",
                     "name": "Update",
                     "integration": {
-                        "url": "http://127.0.0.1:7357",
+                        "url": config.BOT_ENDPOINT + '/do-nothing',
                         "context": {
-                        "action": "do_something_update"
+                            "action": "do_something_update"
                         }
                     }
                     }
