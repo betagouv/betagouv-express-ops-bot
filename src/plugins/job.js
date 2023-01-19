@@ -6,16 +6,11 @@ async function jobs(ctx, job_id) {
         const r = helper.getJobInfo(job_id)
 
         resp = "\n``` json\n"
-        resp += JSON.stringify(r.data)
+        resp += JSON.stringify(r)
         resp += "\n```\n"
 
-        if (![200, 201].includes(r.status)) {
-            console.log(
-                `betaservices jobs reponse incorrecte: {}`)
-            return `:confused: Oups, réponse incorrecte: json request [${r.status}] ${resp}`
-        } else {
-            return `Ta demande est en cours de réalisation: ${resp}`
-        }
+        return `Result: ${resp}`
+
     } catch(e) {
         console.log(`betaservices jobs connectionerror: ` + e)
         return `:confused: Oups, une erreur s'est produite`
