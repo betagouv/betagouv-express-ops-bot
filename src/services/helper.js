@@ -1,5 +1,6 @@
 const axios = require('axios')
 const config = require('../config')
+const IN_MEMORY_DB = require('../services/inmemory').IN_MEMORY_DB
 
 module.exports = {
     getJobInfo: async function(job_id) {

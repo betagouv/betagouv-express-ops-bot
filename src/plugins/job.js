@@ -1,5 +1,4 @@
 const helper = require('../services/helper')
-// const IN_MEMORY_DB = require('../services/inmemory').IN_MEMORY_DB
 
 async function jobs(ctx, job_id) {
     try {
