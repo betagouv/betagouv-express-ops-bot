@@ -26,6 +26,7 @@ module.exports = {
                         "integration": {
                             "url": config.BOT_ENDPOINT + '/set-finished',
                             "context": {
+                                "token": config.AIRTABLE_INTERRACTIVE_TOKEN,
                                 "action": "do_something_update"
                             }
                         }
