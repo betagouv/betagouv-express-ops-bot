@@ -18,7 +18,10 @@ module.exports = {
                             "action": "do_something"
                           }
                         },
-                        "type": "input"
+                        "display_name": "Email",
+                        "name": "email",
+                        "type": "text",
+                        "subtype": "email",
                     }
                     // {
                     //     "id": "message",
