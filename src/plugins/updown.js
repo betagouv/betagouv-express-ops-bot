@@ -7,7 +7,7 @@ async function updown_check(ctx, project_name, team_name) {
         project_name,
         team_name
     }
-    helper.call(api_endpoint,
+    helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
@@ -22,7 +22,7 @@ async function updown_enable(ctx, project_name, team_name) {
         project_name,
         team_name
     }
-    helper.call(api_endpoint,
+    helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
@@ -37,7 +37,7 @@ async function updown_disable(ctx, project_name, team_name) {
         project_name,
         team_name
     }
-    helper.call(api_endpoint,
+    helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
@@ -52,7 +52,7 @@ async function updown_delete(ctx, project_name, team_name) {
         project_name,
         team_name
     }
-    helper.call(api_endpoint,
+    helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
