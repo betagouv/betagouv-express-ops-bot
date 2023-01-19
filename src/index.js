@@ -51,20 +51,19 @@ async function response(ctx) {
 
 app.post('/set-finished', async (req, res) => {
     console.log('SEt finished', req.body)
-    return {
+    return res.json({
         "update": {
           "message": "Updated!",
-          "props": {}
         }
-    }
+    })
 
 })
 
 app.post('/do-nothing', async (req, res) => {
     console.log('Set do nothing', req.body)
-    return {
+    return res.json({
         "ephemeral_text": "You updated the post!"
-    }
+    })
 })
 
 app.post("/check-question", async ( req, res ) => {
