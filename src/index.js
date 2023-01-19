@@ -55,21 +55,16 @@ app.post('/set-finished', async (req, res) => {
         "update": {
           "message": "Updated!",
           "props": {}
-        },
-        "ephemeral_text": "You updated the post!"
-      }
+        }
+    }
 
 })
 
 app.post('/do-nothing', async (req, res) => {
     console.log('Set do nothing', req.body)
     return {
-        "update": {
-          "message": "Updated!",
-          "props": {}
-        },
         "ephemeral_text": "You updated the post!"
-      }
+    }
 })
 
 app.post("/check-question", async ( req, res ) => {
