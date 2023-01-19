@@ -1,61 +1,57 @@
 const config = require('../config')
 const helper = require('../services/helper')
 
-async function updown_check(ctx, project_name, team_name) {
+async function updown_check(ctx, url) {
     const api_endpoint = `/api/updown/check`
     const params = {
-        project_name,
-        team_name
+        url
     }
     return helper.call(ctx, api_endpoint,
         params,
         {
-            finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
+            finished: `Updown: ajout de l'url ${url} :white_check_mark:`,
             error: `Updown : la tâche ${ctx.post_id} n'est pas fini après 10s, il doit y avoir une erreur`
         }
     )
 }
 
-async function updown_enable(ctx, project_name, team_name) {
+async function updown_enable(ctx, url) {
     const api_endpoint = `/api/updown/check/enable`
     const params = {
-        project_name,
-        team_name
+        url
     }
     return helper.call(ctx, api_endpoint,
         params,
         {
-            finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
+            finished: `Updown: enable check sur l'url ${url} :white_check_mark:`,
             error: `Updown : la tâche ${ctx.post_id} n'est pas fini après 10s, il doit y avoir une erreur`
         }
     )
 }
 
-async function updown_disable(ctx, project_name, team_name) {
+async function updown_disable(ctx, url) {
     const api_endpoint = `/api/updown/check/disable`
     const params = {
-        project_name,
-        team_name
+        url
     }
     return helper.call(ctx, api_endpoint,
         params,
         {
-            finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
+            finished: `Updown: disable check de l'url ${url} :white_check_mark:`,
             error: `Updown : la tâche ${ctx.post_id} n'est pas fini après 10s, il doit y avoir une erreur`
         }
     )
 }
 
-async function updown_delete(ctx, project_name, team_name) {
+async function updown_delete(ctx, url) {
     const api_endpoint = `/api/updown/check/delete`
     const params = {
-        project_name,
-        team_name
+        url
     }
     return helper.call(ctx, api_endpoint,
         params,
         {
-            finished: `Updown: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,
+            finished: `Updown: suppresion du site ${url} :white_check_mark:`,
             error: `Updown : la tâche ${ctx.post_id} n'est pas fini après 10s, il doit y avoir une erreur`
         }
     )
