@@ -7,7 +7,7 @@ async function scalingoapp(ctx, app_name, app_region, app_collaborator) {
         app_region,
         app_collaborator
     }
-    const api_endpoint = `${config.endpoint}/api/scalingo/apps`
+    const api_endpoint = `/api/scalingo/apps`
     helper.call(api_endpoint,
         params,
         {

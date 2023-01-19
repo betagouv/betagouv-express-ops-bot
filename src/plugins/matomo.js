@@ -6,7 +6,7 @@ async function matomo_site(ctx, url, email) {
         url,
         email
     }
-    const api_endpoint = `${config.endpoint}/api/matomo/site`
+    const api_endpoint = `/api/matomo/site`
     helper.call(api_endpoint,
         params,
         {
@@ -21,7 +21,7 @@ async function matomo_user(ctx, url, email) {
         url,
         email
     }
-    const api_endpoint = `${config.endpoint}/api/matomo/user`
+    const api_endpoint = `/api/matomo/user`
     helper.call(api_endpoint,
         params,
         {

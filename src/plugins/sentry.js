@@ -22,7 +22,7 @@ async function sentry_team(ctx, team_name, email) {
         team_name,
         email
     }
-    const api_endpoint = `${config.endpoint}/api/sentry/team`
+    const api_endpoint = `/api/sentry/team`
     helper.call(api_endpoint,
         params,
         {
@@ -33,7 +33,7 @@ async function sentry_team(ctx, team_name, email) {
 }
 
 async function sentry_project(ctx, project_name, team_name) {
-    const api_endpoint = `${config.endpoint}/api/sentry/project`
+    const api_endpoint = `/api/sentry/project`
     const params = {
         project_name,
         team_name
@@ -50,7 +50,7 @@ async function sentry_project(ctx, project_name, team_name) {
 async function sentry_member(ctx, email, team_name) {
     /* Ajout d un membre dans une team sur sentry: [email] [team]*/
 
-    const api_endpoint = `${config.endpoint}/api/sentry/member`
+    const api_endpoint = `/api/sentry/member`
     const params = {
         project_name,
         team_name

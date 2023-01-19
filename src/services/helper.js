@@ -15,7 +15,8 @@ module.exports = {
             throw new Error(e)
         }
     },
-    call: async function call(api_endpoint, params, { finished, error }) {
+    call: async function call(api, params, { finished, error }) {
+        const api_endpoint = `${config.endpoint}${api}`
         try {
             const r = await axios
             .post(api_endpoint, params, {

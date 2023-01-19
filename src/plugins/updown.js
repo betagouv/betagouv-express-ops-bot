@@ -2,7 +2,7 @@ const config = require('../config')
 const helper = require('../services/helper')
 
 async function updown_check(ctx, project_name, team_name) {
-    const api_endpoint = `${config.endpoint}/api/updown/check`
+    const api_endpoint = `/api/updown/check`
     const params = {
         project_name,
         team_name
@@ -17,7 +17,7 @@ async function updown_check(ctx, project_name, team_name) {
 }
 
 async function updown_enable(ctx, project_name, team_name) {
-    const api_endpoint = `${config.endpoint}/api/updown/check/enable`
+    const api_endpoint = `/api/updown/check/enable`
     const params = {
         project_name,
         team_name
@@ -32,7 +32,7 @@ async function updown_enable(ctx, project_name, team_name) {
 }
 
 async function updown_disable(ctx, project_name, team_name) {
-    const api_endpoint = `${config.endpoint}/api/updown/check/disable`
+    const api_endpoint = `/api/updown/check/disable`
     const params = {
         project_name,
         team_name
@@ -47,7 +47,7 @@ async function updown_disable(ctx, project_name, team_name) {
 }
 
 async function updown_delete(ctx, project_name, team_name) {
-    const api_endpoint = `${config.endpoint}/api/updown/check/delete`
+    const api_endpoint = `/api/updown/check/delete`
     const params = {
         project_name,
         team_name
