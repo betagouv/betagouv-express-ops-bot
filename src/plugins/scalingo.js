@@ -7,6 +7,12 @@ async function scalingoapp(ctx, app_name, app_region, app_collaborator) {
         app_region,
         app_collaborator
     }
+    const errors = {}
+    helper.isValidEmail(app_collaborator, (error) => { errors['app_collaborator'] = error })
+    helper.isValidRegion(url, (error) => { errors['app_region'] = error })
+    if (errors.length) {
+        return `Erreur de params : ${JSON.stringify(errors)}`
+    }
     const api_endpoint = `/api/scalingo/apps`
     return helper.call(ctx, api_endpoint,
         params,

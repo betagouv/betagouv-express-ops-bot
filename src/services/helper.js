@@ -45,5 +45,33 @@ module.exports = {
             console.log(`betaservices ${api} connectionerror: ` + e)
             return `:confused: Oups, une erreur s'est produite`
         }
+    },
+    isValidEmail: (value, callback) => {
+        const isEmail = String(value).toLowerCase().match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+        const isValidEmail = String(value).endsWith('.gouv.fr')
+        const resp = isEmail && isValidEmail
+        if (!resp) {
+            callback(`L'email n'est pas valide. Email en .gouv.fr uniquement.`)
+        }
+        return resp
+    },
+    isValidRegion: (value, callback) => {
+        const resp = ['osc-fr1', 'osc-secnum-fr1'].includes(value)
+        if (!resp) {
+            callback(`La région n'est pas valide. Valeur acceptée osc-fr1 ou osc-secnum-fr1.`)
+        }
+        return resp
+    },
+    isValidUrl: (value, call) => {
+        value = String(value)
+        const isUrl = /^(http(s):\/\/.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/.test(value)
+        const isValidUrl = value.endsWith('.gouv.fr') || value.endsWith('.gouv.fr/')
+        const resp = isUrl && isValidUrl
+        if (!resp) {
+            callback(`L'url n'est pas valide. Url requise finissant par .gouv.fr`)
+        }
+        return resp
     }
 }

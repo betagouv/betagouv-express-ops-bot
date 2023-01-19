@@ -6,6 +6,13 @@ async function matomo_site(ctx, url, email) {
         url,
         email
     }
+    const errors = {}
+    helper.isValidEmail(email, (error) => {errors['email'].push(error)})
+    helper.isValidUrl(url, (error) => {errors['url'].push(error)})
+    if (Object.keys(errors).length) {
+        return `Erreur de params : ${JSON.stringify(errors)}`
+    }
+
     const api_endpoint = `/api/matomo/site`
     return helper.call(ctx, api_endpoint,
         params,
@@ -20,6 +27,12 @@ async function matomo_user(ctx, url, email) {
     const params = {
         url,
         email
+    }
+    const errors = {}
+    helper.isValidEmail(email, (error) => {errors['email'].push(error)})
+    helper.isValidUrl(url, (error) => {errors['url'].push(error)})
+    if (Object.keys(errors).length) {
+        return `Erreur de params : ${JSON.stringify(errors)}`
     }
     const api_endpoint = `/api/matomo/user`
     return helper.call(ctx, api_endpoint,

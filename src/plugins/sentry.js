@@ -22,6 +22,12 @@ async function sentry_team(ctx, team_name, email) {
         team_name,
         email
     }
+    const errors = {}
+    helper.isValidEmail(email, (error) => {errors['email'].push(error)})
+    if (Object.keys(errors).length) {
+        return `Erreur de params : ${JSON.stringify(errors)}`
+    }
+
     const api_endpoint = `/api/sentry/team`
     return helper.call(ctx, api_endpoint,
         params,
