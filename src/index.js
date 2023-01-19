@@ -53,22 +53,25 @@ async function response(ctx) {
     }
 }
 
+app.post('/change-status-airtable', async(req, res) => {
+    console.log(req.body)
+})
+
 app.post('/set-finished', async (req, res) => {
-    console.log('SEt finished', req.body)
+    console.log('SEt finished', req.body.trigger_id)
     if (req.body.context.token === config.AIRTABLE_INTERRACTIVE_TOKEN) {
         await axios.post(config.MATTERMOST_URL, {
             "trigger_id": req.body.trigger_id,
-            "url": config.BOT_ENDPOINT,
+            "url": config.BOT_ENDPOINT + '/change-status-airtable',
             "dialog": {
                 "callback_id": "testId",
                 "title": "Hello",
                 "introduction_text": "Hello",
                 "elements": [{
-                    "display_name": "Email",
+                    "display_name": "Quel est le record id airtable",
                     "name": "email",
                     "type": "text",
-                    "subtype": "email",
-                    "placeholder": "placeholder@example.com"
+                    "placeholder": "rec2319382131323"
                 }],
                 "submit_label": "Ok",
                 "notify_on_cancel": false,
@@ -85,16 +88,18 @@ app.post('/set-finished', async (req, res) => {
             })
         }
         return res.json({
-            "update": {
-              "message": "Une erreur c'est produit",
-              props: {} // {} to removed attachement
-            }
+            "ephemeral_text": "You updated the post!"
         })
+        // return res.json({
+        //     "update": {
+        //       "message": "Une erreur c'est produit",
+        //       props: {} // {} to removed attachement
+        //     }
+        // })
     }
 })
 
 app.post('/do-nothing', async (req, res) => {
-    console.log('Set do nothing', req.body)
     return res.json({
         "ephemeral_text": "You updated the post!"
     })

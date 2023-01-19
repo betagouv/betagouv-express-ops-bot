@@ -13,7 +13,7 @@ module.exports = {
                         "id": "message",
                         "name": "Ephemeral Message",
                         "integration": {
-                            "url": config.BOT_ENDPOINT + '/set-finished',
+                            "url": config.BOT_ENDPOINT + '/do-nothing',
                             "context": {
                                 "token": config.AIRTABLE_INTERRACTIVE_TOKEN,
                                 "action": "do_something_ephemeral"
@@ -24,7 +24,7 @@ module.exports = {
                         "id": "update",
                         "name": "Update",
                         "integration": {
-                            "url": config.BOT_ENDPOINT + '/do-nothing',
+                            "url": config.BOT_ENDPOINT + '/set-finished',
                             "context": {
                                 "action": "do_something_update"
                             }
