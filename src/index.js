@@ -51,12 +51,14 @@ async function response(ctx) {
 
 app.post('/set-finished', async (req, res) => {
     console.log('SEt finished', req.body)
-    return res.json({
-        "update": {
-          "message": "Updated!",
-        }
-    })
-
+    if (req.body.context.token === config.AIRTABLE_INTERRACTIVE_TOKEN) {
+        return res.json({
+            "update": {
+              "message": "Updated!",
+              props: {}
+            }
+        })
+    }
 })
 
 app.post('/do-nothing', async (req, res) => {

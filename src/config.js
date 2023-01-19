@@ -8,5 +8,6 @@ module.exports = {
 	},
 	endpoint: process.env.BETAOPSBOT_API_ENDPOINT,
 	airtable_endpoint: process.env.BETAOPSBOT_ALWAYSDATA_WEBHOOK,
-	BOT_ENDPOINT: process.env.BOT_ENDPOINT
+	BOT_ENDPOINT: process.env.BOT_ENDPOINT,
+	AIRTABLE_INTERRACTIVE_TOKEN: process.env.AIRTABLE_INTERRACTIVE_TOKEN
 }
