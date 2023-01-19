@@ -1,5 +1,5 @@
 const helper = require('../services/helper')
-const IN_MEMORY_DB = require('../services/inmemory').IN_MEMORY_DB
+// const IN_MEMORY_DB = require('../services/inmemory').IN_MEMORY_DB
 
 async function jobs(ctx, job_id) {
     try {
@@ -9,11 +9,6 @@ async function jobs(ctx, job_id) {
         resp += JSON.stringify(r.data)
         resp += "\n```\n"
 
-        IN_MEMORY_DB[ctx.post_id] = {
-            job_id: r.data.request,
-            finished,
-            error
-        }
         if (![200, 201].includes(r.status)) {
             console.log(
                 `betaservices jobs reponse incorrecte: {}`)
