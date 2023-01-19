@@ -2,8 +2,7 @@ const helper = require('../services/helper')
 
 async function jobs(ctx, job_id) {
     try {
-        const r = helper.getJobInfo(job_id)
-        console.log('jobs', r)
+        const r = await helper.getJobInfo(job_id)
         let resp = "\n``` json\n"
         resp += JSON.stringify(r)
         resp += "\n```\n"
