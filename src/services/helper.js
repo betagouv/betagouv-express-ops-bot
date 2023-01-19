@@ -11,7 +11,6 @@ module.exports = {
 
         try {
             const r = await axios.get(api_endpoint, { headers: config.headers }).catch(e => e.response)
-            console.log(r)
             return r.data   
         } catch(e) {
             throw new Error(e)
@@ -26,7 +25,7 @@ module.exports = {
             })
             .catch(e => e.response )
     
-            resp = "\n``` json\n"
+            const resp = "\n``` json\n"
             resp += JSON.stringify(r.data)
             resp += "\n```\n"
     
