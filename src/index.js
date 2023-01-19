@@ -10,6 +10,8 @@ const scalingo = require('./plugins/scalingo')
 const updown = require('./plugins/updown')
 const help = require('./plugins/help')
 const job = require('./plugins/job')
+const config = require('./config')
+
 const app = express();
 const port = process.env.PORT; // default port to listen
 app.use(express.json())  
