@@ -23,7 +23,7 @@ async function sentry_team(ctx, team_name, email) {
         email
     }
     const api_endpoint = `/api/sentry/team`
-    helper.call(ctx, api_endpoint,
+    return helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Sentry: ajout de l utilisateur ${email} à la team ${team_name} :white_check_mark:`,
@@ -38,7 +38,7 @@ async function sentry_project(ctx, project_name, team_name) {
         project_name,
         team_name
     }
-    helper.call(ctx, api_endpoint,
+    return helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Sentry: ajout du projet ${project_name} à la team ${team_name} :white_check_mark:`,

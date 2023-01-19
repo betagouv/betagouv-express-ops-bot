@@ -8,7 +8,7 @@ async function scalingoapp(ctx, app_name, app_region, app_collaborator) {
         app_collaborator
     }
     const api_endpoint = `/api/scalingo/apps`
-    helper.call(ctx, api_endpoint,
+    return helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Scalingo: creation de l'app ${app_name}, ${app_region}, with ${app_collaborator} :white_check_mark:`,

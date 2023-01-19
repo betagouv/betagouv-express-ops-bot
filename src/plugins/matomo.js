@@ -7,7 +7,7 @@ async function matomo_site(ctx, url, email) {
         email
     }
     const api_endpoint = `/api/matomo/site`
-    helper.call(ctx, api_endpoint,
+    return helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Matomo: création du site ${url} avec un administrateur ${email} et stats publiques :white_check_mark::`,
@@ -22,7 +22,7 @@ async function matomo_user(ctx, url, email) {
         email
     }
     const api_endpoint = `/api/matomo/user`
-    helper.call(ctx, api_endpoint,
+    return helper.call(ctx, api_endpoint,
         params,
         {
             finished: `Matomo: ajout de l utilisateur ${email} avec le role access sur ${url} :white_check_mark:`,
