@@ -1,5 +1,10 @@
 const express = require( "express" );
-const sentry = require('./module/sentry')
+const sentry = require('./plugins/sentry')
+const airtable = require('./plugins/airtable')
+const matomo = require('./plugins/matomo')
+const scalingo = require('./plugins/scalingo')
+const updown = require('./plugins/updown')
+const job = require('./plugins/job')
 const app = express();
 const port = process.env.PORT; // default port to listen
 app.use(express.json())  
@@ -10,9 +15,34 @@ app.get( "/", ( req, res ) => {
 
 const ENDPOINTS = [
     sentry.sentry_member,
-    sentry.response_sentry_member
+    sentry.response_sentry_member,
+    sentry.response,
+    matomo.matomo_site,
+    matomo.matomo_user,
+    scalingo.scalingoapp,
+    updown.updown_check,
+    updown.updown_delete,
+    updown.updown_disable,
+    updown.updown_enable,
+    job.jobs,
+    airtable
 ]
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
+
+async function response(ctx) {
+    await setTimeout(10000);
+    if (IN_MEMORY_DB[ctx.post_id]) {
+        const job = await helper.getJobInfo(IN_MEMORY_DB[ctx.post_id].job_id)
+        let text
+        if (job.status === 'finished' && IN_MEMORY_DB[ctx.post_id].finished) {
+            text = IN_MEMORY_DB[ctx.post_id].finished
+        } else if (IN_MEMORY_DB[ctx.post_id].error) {
+            text = IN_MEMORY_DB[ctx.post_id].error
+        }
+        return text
+    }
+}
+
 
 app.post("/check-question", async ( req, res ) => {
     console.log('Received post on main endpoint')
@@ -39,14 +69,14 @@ app.post("/check-result", async ( req, res ) => {
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
         return
     }
-    const cmd = `response ${req.body.text.trim()}`.split(' ').join(' ')
+    const cmd = `${req.body.text.trim()}`.split(' ').join(' ')
     const endpointNames = ENDPOINTS_NAME.filter(endpointName => cmd.startsWith(endpointName))
     console.log("Endpoint response :", endpointNames)
     if (endpointNames.length === 1) {
-        const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
-        const endpointName = endpoint.name.split('_').join(' ')
-        const params = cmd.replace(endpointName, '').trim().split(' ')
-        const resp = await endpoint(req.body, ...params)
+        // const endpoint = ENDPOINTS.find(endpoint => endpoint.name.split('_').join(' ') === endpointNames[0])
+        // const endpointName = endpoint.name.split('_').join(' ')
+        // const params = cmd.replace(endpointName, '').trim().split(' ')
+        const resp = await response(req.body)
         return res.json({
             text: resp,
             response_type: 'comment',
