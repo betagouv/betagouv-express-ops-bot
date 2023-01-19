@@ -8,6 +8,7 @@ const airtable = require('./plugins/airtable')
 const matomo = require('./plugins/matomo')
 const scalingo = require('./plugins/scalingo')
 const updown = require('./plugins/updown')
+const help = require('./plugins/help')
 const job = require('./plugins/job')
 const app = express();
 const port = process.env.PORT; // default port to listen
@@ -29,7 +30,8 @@ const ENDPOINTS = [
     updown.updown_disable,
     updown.updown_enable,
     job.jobs,
-    airtable.airtable
+    airtable.airtable,
+    help.help
 ]
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
 
@@ -47,7 +49,6 @@ async function response(ctx) {
     }
 }
 
-
 app.post("/check-question", async ( req, res ) => {
     console.log('Received post on main endpoint')
     if (!process.env.TOKEN.split(',').includes(req.body.token)) { 
@@ -61,6 +62,11 @@ app.post("/check-question", async ( req, res ) => {
         const endpointName = endpoint.name.split('_').join(' ')
         const params = cmd.replace(endpointName, '').trim().split(' ')
         const resp = await endpoint(req.body,...params)
+        if (endpointName === 'help') {
+            return res.json({
+                ...resp
+            })
+        }
         return res.json({
             text: resp,
             response_type: 'comment',
