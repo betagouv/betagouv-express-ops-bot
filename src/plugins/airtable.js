@@ -1,7 +1,7 @@
 const helper = require('../services/helper')
 const config = require('../config')
 
-async function scalingoapp(ctx, app_name, app_region, app_collaborator) {
+async function airtable(ctx, app_name, app_region, app_collaborator) {
     const params = {
         app_name,
         app_region,
@@ -18,5 +18,5 @@ async function scalingoapp(ctx, app_name, app_region, app_collaborator) {
 }
 
 module.exports = {
-    scalingoapp
+    airtable
 }

@@ -15,8 +15,8 @@ app.get( "/", ( req, res ) => {
 
 const ENDPOINTS = [
     sentry.sentry_member,
-    sentry.response_sentry_member,
-    sentry.response,
+    sentry.sentry_project,
+    sentry.sentry_team,
     matomo.matomo_site,
     matomo.matomo_user,
     scalingo.scalingoapp,
@@ -25,7 +25,7 @@ const ENDPOINTS = [
     updown.updown_disable,
     updown.updown_enable,
     job.jobs,
-    airtable
+    airtable.airtable
 ]
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
 
