@@ -18,10 +18,10 @@ module.exports = {
                             "action": "do_something"
                           }
                         },
-                        "display_name": "Email",
-                        "name": "email",
-                        "type": "text",
-                        "subtype": "email",
+                        "display_name": "Ticket Description",
+                        "name": "ticket_description",
+                        "type": "textarea",
+                        "help_text": "Provide description for your ticket."
                     }
                     // {
                     //     "id": "message",
