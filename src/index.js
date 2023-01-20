@@ -59,6 +59,12 @@ app.post('/change-status-airtable', async(req, res) => {
         const resp = await airtablelib.setStatus(req.body.submission.email, "Fini")
         console.log('change status airtable', resp)
         console.log(`Set record ${req.body.submission.email} to finish`)
+        return res.status(200).json({ 
+            "update": {
+                    "message": "Updated!",
+                props: {} // {} to removed attachement
+            }
+        })
     }
     res.status(200).json({})
 })
@@ -96,7 +102,7 @@ app.post('/set-finished', async (req, res) => {
             })
         }
         return res.json({
-            "ephemeral_text": "You updated the post!"
+            // "ephemeral_text": "You updated the post!"
         })
         // return res.json({
         //     "update": {
