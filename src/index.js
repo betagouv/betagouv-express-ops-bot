@@ -57,11 +57,10 @@ async function response(ctx) {
 app.post('/change-status-airtable', async(req, res) => {
     if (IN_MEMORY_DB.verify_callback_id(req.body.callback_id)) {
         const resp = await airtablelib.setStatus(req.body.submission.email, "Fini")
-        console.log('change status airtable', resp)
         console.log(`Set record ${req.body.submission.email} to finish`)
         return res.status(200).json({ 
             "update": {
-                    "message": "Updated!",
+                "message": "Updated!",
                 props: {} // {} to removed attachement
             }
         })
