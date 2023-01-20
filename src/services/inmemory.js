@@ -10,7 +10,7 @@ module.exports = {
             return this.postInfos[postId]
         },
         add_callback_id: function(callback_id) {
-            this.add_callback_id(callback_id)
+            this.callbackIds.push(callback_id)
         },
         verify_callback_id: function(callback_id) {
             let verified = false
