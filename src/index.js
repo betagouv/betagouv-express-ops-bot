@@ -13,7 +13,7 @@ const help = require('./plugins/help')
 const job = require('./plugins/job')
 const config = require('./config')
 const airtablelib = require('./lib/airtable')
-
+const TokenGenerator = require('./lib/tokenGenerator')
 const app = express();
 const port = process.env.PORT; // default port to listen
 app.use(express.json())  
@@ -41,21 +41,21 @@ const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join('
 
 async function response(ctx) {
     await setTimeout(10000);
-    if (IN_MEMORY_DB[ctx.post_id]) {
-        const job = await helper.getJobInfo(IN_MEMORY_DB[ctx.post_id].job_id)
+    const postInfo = IN_MEMORY_DB.get_post_info(ctx.post_id)
+    if (postInfo) {
+        const job = await helper.getJobInfo(postInfo.job_id)
         let text
-        if (job.status === 'finished' && IN_MEMORY_DB[ctx.post_id].finished) {
-            text = IN_MEMORY_DB[ctx.post_id].finished
-        } else if (IN_MEMORY_DB[ctx.post_id].error) {
-            text = IN_MEMORY_DB[ctx.post_id].error
+        if (job.status === 'finished' && postInfo.finished) {
+            text = postInfo.finished
+        } else if (postInfo.error) {
+            text = postInfo.error
         }
         return text
     }
 }
 
 app.post('/change-status-airtable', async(req, res) => {
-    console.log(req.body.callback_id, req.body.submission.email)
-    if (req.body.callback_id === 'testId') {
+    if (IN_MEMORY_DB.verify_callback_id(req.body.callback_id)) {
         const resp = await airtablelib.setStatus(req.body.submission.email, "Fini")
         console.log('change status airtable', resp)
         console.log(`Set record ${req.body.submission.email} to finish`)
@@ -64,25 +64,26 @@ app.post('/change-status-airtable', async(req, res) => {
 })
 
 app.post('/set-finished', async (req, res) => {
-    console.log('SEt finished', req.body.trigger_id)
     if (req.body.context.token === config.AIRTABLE_INTERRACTIVE_TOKEN) {
+        const callback_id = TokenGenerator.generateToken()
+        IN_MEMORY_DB.add_callback_id(callback_id)
         await axios.post(config.MATTERMOST_URL, {
-            "trigger_id": req.body.trigger_id,
-            "url": config.BOT_ENDPOINT + '/change-status-airtable',
-            "dialog": {
-                "callback_id": "testId",
-                "title": "Hello",
-                "introduction_text": "Hello",
-                "elements": [{
+            trigger_id: req.body.trigger_id,
+            url: config.BOT_ENDPOINT + '/change-status-airtable',
+            dialog: {
+                callback_id,
+                title: "Hello",
+                introduction_text: "Hello",
+                elements: [{
                     "display_name": "Quel est le record id airtable",
                     "name": "email",
                     "type": "text",
                     "subtype:": "text",
                     "placeholder": "rec2319382131323"
                 }],
-                "submit_label": "Ok",
-                "notify_on_cancel": false,
-                "state": "<string provided by the integration that will be echoed back with dialog submission>"
+                submit_label: "Ok",
+                notify_on_cancel: false,
+                state: "<string provided by the integration that will be echoed back with dialog submission>"
             }
         })
         if (req.body.context.recordId) {

@@ -29,11 +29,11 @@ module.exports = {
             resp += JSON.stringify(r.data)
             resp += "\n```\n"
     
-            IN_MEMORY_DB[ctx.post_id] = {
+            IN_MEMORY_DB.add_post_info(ctx.post_id, {
                 job_id: r.data.request,
                 finished,
                 error
-            }
+            })
             if (![200, 201].includes(r.status)) {
                 console.log(
                     `betaservices ${api} reponse incorrecte: {}`)
