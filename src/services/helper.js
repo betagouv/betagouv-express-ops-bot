@@ -67,7 +67,7 @@ module.exports = {
     isValidUrl: (value, call) => {
         value = String(value)
         const isUrl = /^(http(s):\/\/.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/.test(value)
-        const isValidUrl = value.endsWith('.gouv.fr') || value.endsWith('.gouv.fr/')
+        const isValidUrl = value.endsWith('.gouv.fr') || value.endsWith('.gouv.fr/') || value.endsWith('.incubateur.net')
         const resp = isUrl && isValidUrl
         if (!resp) {
             callback(`L'url n'est pas valide. Url requise finissant par .gouv.fr`)
