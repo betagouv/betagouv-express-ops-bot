@@ -68,60 +68,7 @@ async function sentry_member(ctx, email, team_name) {
             error: `Sentry : la tâche ${ctx.post_id} n'est pas fini après 10s il doit y avoir une erreu`
         }
     )
-
-    // console.log('Sentry member')
-
-    // const api_endpoint = `/api/sentry/member`
-
-    // try {
-    //     const params = {
-    //         email,
-    //         team_name,
-    //     }
-    //     const r = await axios
-    //         .post(api_endpoint, params, {
-    //             headers:config.headers
-    //         })
-    //         .catch(e => e.response )
-
-    //     resp = "\n``` json\n"
-    //     resp += JSON.stringify(r.data)
-    //     resp += "\n```\n"
-
-    //     IN_MEMORY_DB[ctx.post_id] = {
-    //         job_id: r.data.request,
-    //         name: 'sentry_member',
-    //         finished: `Sentry: ajout de l utilisateur ${email} à la team ${team_name} :white_check_mark:`,
-    //         error: `Sentry : la tâche ${ctx.post_id} n'est pas fini après 10s il doit y avoir une erreur`
-    //     }
-
-    //     if (![200, 201].includes(r.status)) {
-    //         console.log(
-    //             "`betaservices sentry member` reponse incorrecte: {}")
-    //         return `:confused: Oups, réponse incorrecte: json request [${r.status}] ${resp}`
-    //     } else {
-    //         return `Ta demande est en cours de réalisation: ${resp}`
-    //     }
-    // } catch(e) {
-    //     console.log("`betaservices sentry member` connectionerror: " + e)
-    //     return `:confused: Oups, une erreur s'est produite`
-    // }
 }
-
-// async function response_sentry_member(ctx, email, team_name) {
-//     await setTimeout(10000);
-//     if (IN_MEMORY_DB[ctx.post_id]) {
-//         const job = await helper.getJobInfo(IN_MEMORY_DB[ctx.post_id])
-//         console.log('LCS JOB RESPONSE', job)
-//         let text
-//         if (job.status === 'finished') {
-//             text = `Sentry: ajout de l utilisateur ${email} à la team ${team_name} :white_check_mark: ${IN_MEMORY_DB[ctx.post_id]}`
-//         } else {
-//             text = `Sentry : la tâche ${IN_MEMORY_DB[ctx.post_id]} n'est pas fini après 10s il doit y avoir une erreur`
-//         }
-//         return text
-//     }
-// }
 
 module.exports = {
     sentry_member,

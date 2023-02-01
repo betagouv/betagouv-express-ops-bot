@@ -40,15 +40,19 @@ const ENDPOINTS = [
 const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join(' '))
 
 async function response(ctx) {
-    await setTimeout(10000);
+    await setTimeout(10000)
+    const params = req.body.split(' ')
+    let chatMember = params.find(p => p.includes('chatmember='))
+    let recordId = params.find(p => p.includes('recordid='))
+    params = params.filter(p => !p.includes('chatmember=') && !p.includes('recordid='))
     const postInfo = IN_MEMORY_DB.get_post_info(ctx.post_id)
     if (postInfo) {
         const job = await helper.getJobInfo(postInfo.job_id)
         let text
         if (job.status === 'finished' && postInfo.finished) {
-            text = postInfo.finished
+            text = postInfo.finished + ' ' + recordId
         } else if (postInfo.error) {
-            text = postInfo.error
+            text = postInfo.error + ' ' + recordId
         }
         return text
     }
