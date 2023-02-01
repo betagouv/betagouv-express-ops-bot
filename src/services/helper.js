@@ -64,7 +64,7 @@ module.exports = {
         }
         return resp
     },
-    isValidUrl: (value, call) => {
+    isValidUrl: (value, callback) => {
         value = String(value)
         const isUrl = /^(http(s):\/\/.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/.test(value)
         const isValidUrl = value.endsWith('.gouv.fr') || value.endsWith('.gouv.fr/') || value.endsWith('.incubateur.net')
