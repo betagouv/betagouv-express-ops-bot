@@ -41,7 +41,7 @@ const ENDPOINTS_NAME = ENDPOINTS.map(endpoint => endpoint.name.split('_').join('
 
 async function response(ctx) {
     await setTimeout(10000)
-    const params = req.body.split(' ')
+    const params = ctx.text.split(' ')
     let chatMember = params.find(p => p.includes('chatmember='))
     let recordId = params.find(p => p.includes('recordid='))
     params = params.filter(p => !p.includes('chatmember=') && !p.includes('recordid='))
