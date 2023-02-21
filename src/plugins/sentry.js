@@ -23,7 +23,7 @@ async function sentry_team(ctx, team_name, email) {
         email
     }
     const errors = {}
-    helper.isValidEmail(email, (error) => {errors['email'].push(error)})
+    helper.isValidEmail(email, (error) => {errors['email'] = error })
     if (Object.keys(errors).length) {
         return `Erreur de params : ${JSON.stringify(errors)}`
     }
