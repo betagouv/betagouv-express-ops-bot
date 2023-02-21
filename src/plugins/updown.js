@@ -7,7 +7,7 @@ async function updown_check(ctx, url) {
         url
     }
     const errors = {}
-    helper.isValidUrl(url, (error) => {errors['url'].push(error)})
+    helper.isValidUrl(url, (error) => {errors['url'] = error})
     if (Object.keys(errors).length) {
         return `Erreur de params : ${JSON.stringify(errors)}`
     }
@@ -26,10 +26,8 @@ async function updown_enable(ctx, url) {
     const params = {
         url
     }
-    const errors = {
-        url: []
-    }
-    helper.isValidUrl(url, (error) => {errors['url'].push(error)})
+    const errors = {}
+    helper.isValidUrl(url, (error) => {errors['url'] = error })
     if (Object.keys(errors).length) {
         return `Erreur de params : ${JSON.stringify(errors)}`
     }
@@ -48,10 +46,8 @@ async function updown_disable(ctx, url) {
     const params = {
         url
     }
-    const errors = {
-        url: []
-    }
-    helper.isValidUrl(url, (error) => {errors['url'].push(error)})
+    const errors = {}
+    helper.isValidUrl(url, (error) => {errors['url'] = error })
     if (Object.keys(errors).length) {
         return `Erreur de params : ${JSON.stringify(errors)}`
     }
@@ -70,10 +66,8 @@ async function updown_delete(ctx, url) {
     const params = {
         url
     }
-    const errors = {
-        url: []
-    }
-    helper.isValidUrl(url, (error) => {errors['url'].push(error)})
+    const errors = {}
+    helper.isValidUrl(url, (error) => {errors['url'] = error })
     if (Object.keys(errors).length) {
         return `Erreur de params : ${JSON.stringify(errors)}`
     }
