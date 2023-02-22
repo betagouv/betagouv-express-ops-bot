@@ -1,8 +1,11 @@
 const config = require('../config')
 const helper = require('../services/helper')
 
-async function updown_check(ctx, url) {
-    const api_endpoint = `/api/updown/check`
+async function updown_check(ctx, url, recipient) {
+    let api_endpoint = `/api/updown/check`
+    if (recipient) {
+        api_endpoint = 'api/updown/create-and-set-recipient'
+    }
     const params = {
         url
     }
