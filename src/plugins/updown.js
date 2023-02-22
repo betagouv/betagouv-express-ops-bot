@@ -7,7 +7,8 @@ async function updown_check(ctx, url, recipient) {
         api_endpoint = '/api/updown/create-and-set-recipient'
     }
     const params = {
-        url
+        url,
+        recipient
     }
     const errors = {}
     helper.isValidUrl(url, (error) => {errors['url'] = error})
