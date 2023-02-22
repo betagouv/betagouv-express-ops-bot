@@ -14,6 +14,7 @@ async function scalingoapp(ctx, app_name, app_region, app_collaborator) {
         return `Erreur de params : ${JSON.stringify(errors)}`
     }
     const api_endpoint = `/api/scalingo/apps`
+    console.log(params)
     return helper.call(ctx, api_endpoint,
         params,
         {
