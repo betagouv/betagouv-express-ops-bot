@@ -1,6 +1,27 @@
 const config = require('../config')
 const helper = require('../services/helper')
 
+async function updown_recipient(ctx, url, recipient) {
+    let api_endpoint = `/add-recipient-to-check-task`
+    const params = {
+        url,
+        recipient
+    }
+    const errors = {}
+    helper.isValidUrl(url, (error) => {errors['url'] = error})
+    if (Object.keys(errors).length) {
+        return `Erreur de params : ${JSON.stringify(errors)}`
+    }
+
+    return helper.call(ctx, api_endpoint,
+        params,
+        {
+            finished: `Updown: ajout du ${recipient} à ${url} :white_check_mark:`,
+            error: `Updown : la tâche ${ctx.post_id} n'est pas fini après 10s, il doit y avoir une erreur`
+        }
+    )
+}
+
 async function updown_check(ctx, url, recipient) {
     let api_endpoint = `/api/updown/check`
     if (recipient) {
@@ -19,7 +40,7 @@ async function updown_check(ctx, url, recipient) {
     return helper.call(ctx, api_endpoint,
         params,
         {
-            finished: `Updown: ajout de l'url ${url} :white_check_mark:`,
+            finished: `Updown: ajout de l'url ${url} ${recipient ? "avec des alertes sur " + recipient : ""} :white_check_mark: `,
             error: `Updown : la tâche ${ctx.post_id} n'est pas fini après 10s, il doit y avoir une erreur`
         }
     )
@@ -89,5 +110,6 @@ module.exports = {
     updown_check,
     updown_delete,
     updown_enable,
-    updown_disable
+    updown_disable,
+    updown_recipient
 }
