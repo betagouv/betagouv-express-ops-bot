@@ -2,7 +2,7 @@ const config = require('../config')
 const helper = require('../services/helper')
 
 async function updown_recipient(ctx, url, recipient) {
-    let api_endpoint = `/add-recipient-to-check-task`
+    let api_endpoint = `/api/updown/add-recipient-to-check-task`
     const params = {
         url,
         recipient
