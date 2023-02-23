@@ -33,6 +33,7 @@ const ENDPOINTS = [
     updown.updown_delete,
     updown.updown_disable,
     updown.updown_enable,
+    updown.updown_recipient,
     job.jobs,
     airtable.airtable,
     help.help
