@@ -29,6 +29,7 @@ const ENDPOINTS = [
     matomo.matomo_site,
     matomo.matomo_user,
     scalingo.scalingoapp,
+    scalingo.scalingo_cms,
     updown.updown_check,
     updown.updown_delete,
     updown.updown_disable,
